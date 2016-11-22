@@ -52,3 +52,4 @@ add_darling_executable(patch ${gpatch_sources})
 install(TARGETS patch
 	DESTINATION libexec/darling/usr/bin)
 
+install(FILES patch.1 DESTINATION libexec/darling/usr/share/man/man1)
