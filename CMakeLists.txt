@@ -20,13 +20,6 @@ add_definitions(
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -U_POSIX_C_SOURCE -D__DARWIN_UNIX03 -nostdinc -fPIC")
 
-include_directories(${DARLING_TOP_DIRECTORY}/src/libc/include/FreeBSD)
-include_directories(${DARLING_TOP_DIRECTORY}/src/libc/include/NetBSD)
-include_directories(${DARLING_TOP_DIRECTORY}/src/libc/gen)
-include_directories(${DARLING_TOP_DIRECTORY}/src/libc/darwin)
-include_directories(${DARLING_TOP_DIRECTORY}/src/libc/stdtime/FreeBSD)
-include_directories(${DARLING_TOP_DIRECTORY}/src/launchd/liblaunch)
-include_directories(${DARLING_TOP_DIRECTORY}/src/external/libdispatch)
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/patch)
 
 set(gpatch_sources
