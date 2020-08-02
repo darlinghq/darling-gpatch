@@ -7,22 +7,29 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0005 NEW)
 endif(COMMAND cmake_policy)
 
-include(darling_exe)
-add_definitions(-DHAVE_CONFIG_H -Ded_PROGRAM="/bin/ed")
+add_compile_definitions(
+	HAVE_CONFIG_H
+	ed_PROGRAM="/bin/ed"
+
+	__DARWIN_UNIX03
+)
 
 # Hide warnings
-add_definitions(
+add_compile_options(
 	-Wno-string-plus-int
 	-Wno-format-security
 	-Wno-macro-redefined
 	-Wno-constant-logical-operand
 )
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -U_POSIX_C_SOURCE -D__DARWIN_UNIX03 -nostdinc -fPIC")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdinc -fPIC")
 
-include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/patch)
+include_directories(BEFORE
+	${CMAKE_CURRENT_SOURCE_DIR}/gen
+	${CMAKE_CURRENT_SOURCE_DIR}/patch
+)
 
-set(gpatch_sources
+add_darling_executable(patch
 	patch/addext.c
 	patch/argmatch.c
 	patch/backupfile.c
@@ -30,24 +37,20 @@ set(gpatch_sources
 	patch/dirname.c
 	patch/error.c
 	patch/exitfail.c
-	patch/getopt1.c
 	patch/getopt.c
+	patch/getopt1.c
 	patch/inp.c
 	patch/maketime.c
 	patch/partime.c
 	patch/patch.c
 	patch/pch.c
-	patch/quotearg.c
 	patch/quote.c
+	patch/quotearg.c
 	patch/quotesys.c
 	patch/util.c
 	patch/version.c
 	patch/xmalloc.c
 )
 
-add_darling_executable(patch ${gpatch_sources})
-
-install(TARGETS patch
-	DESTINATION libexec/darling/usr/bin)
-
+install(TARGETS patch DESTINATION libexec/darling/usr/bin)
 install(FILES patch.1 DESTINATION libexec/darling/usr/share/man/man1)

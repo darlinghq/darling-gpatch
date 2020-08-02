@@ -1,0 +1,3 @@
+/bin/sh ../patch/mkinstalldirs /usr/local/bin /usr/local/man/man1
+/usr/bin/install -c patch /usr/local/bin/`echo patch | sed 's,x,x,'`
+/usr/bin/install -c -m 644 ../patch/patch.man /usr/local/man/man1/`echo patch | sed 's,x,x,'`.1
