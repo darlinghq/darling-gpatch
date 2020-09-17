@@ -53,4 +53,4 @@ add_darling_executable(patch
 )
 
 install(TARGETS patch DESTINATION libexec/darling/usr/bin)
-install(FILES patch.1 DESTINATION libexec/darling/usr/share/man/man1)
+install(FILES patch/patch.man DESTINATION libexec/darling/usr/share/man/man1 RENAME patch.1)
